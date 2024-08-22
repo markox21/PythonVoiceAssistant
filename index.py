@@ -49,11 +49,11 @@ def wishMe():
 def username():
     speak("como quiere que lo llame?")
     uname = takeCommand()
-    speak("Welcome" + uname)
+    speak("Bienvenido" + uname)
     columns = shutil.get_terminal_size().columns
      
     print("#####################".center(columns))
-    print(f"Welcome Mr. {uname}".center(columns))
+    print(f"Bienvenido {uname}".center(columns))
     print("#####################".center(columns))
     
     speak("En que lo puedo ayudar?" + uname) 
@@ -76,14 +76,13 @@ def takeCommand():
      
     return query
   
-def sendEmail(to, content):
+def sendEmail(para, contenido):
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
-        # Enable low security in Gmail
-        server.login('your email id', 'your email password')
-        server.sendmail('your email id', to, content)
+        server.login('tu email id', 'tu contraseña email')
+        server.sendmail('tu email id', para, contenido)
         server.close()
         speak("Email fue enviado!")
     except Exception as e:
@@ -168,11 +167,11 @@ if __name__ == '__main__':
             speak("mis amigos me llaman" + assname)
             print("Mis amigos me llaman", assname)
 
-        elif 'exit' in query:
+        elif 'salir' in query:
             speak("Gracias por tu tiempo")
             exit()
 
-        elif "quien te creo" in query or "who created you" in query:
+        elif "quien te creo?" in query or "Quien fue tu creador?" in query:
             speak("Fuí creado por Marko.")
 
         elif 'chiste' in query:
@@ -199,19 +198,16 @@ if __name__ == '__main__':
             speak("Gracias a Marko, no le digas a nadie es un secreto.")
 
         elif 'power point' in query:
-            speak("Opening PowerPoint presentation")
-            power = r"C:\\Users\\GAURAV\\Desktop\\Minor Project\\Presentation\\Voice Assistant.pptx"
+            speak("Abrir presentacion depower point")
+            power = r"C:\\Users\\MARKO-PC\\Desktop\\hola\\Presentacion\\Voice Assistant.pptx"
             os.startfile(power)
-
-        elif 'es amor' in query:
-            speak("It is the 7th sense that destroys all other senses.")
 
         elif "quien eres" in query:
             speak("Soy tu asistente virtual.")
 
-        elif 'change background' in query:
-            ctypes.windll.user32.SystemParametersInfoW(20, 0, "Location of wallpaper", 0)
-            speak("Background changed successfully")
+        elif 'Cambie el fondo' in query:
+            ctypes.windll.user32.SystemParametersInfoW(20, 0, "Ubicación del fondo", 0)
+            speak("Fondo cambiado con éxito")
 
         elif 'abre bluestacks' in query:
             appli = r"C:\\ProgramData\\BlueStacks\\Client\\Bluestacks.exe"
@@ -224,7 +220,7 @@ if __name__ == '__main__':
                 i = 1
 
                 speak('Aqui hay algunas noticias de la India')
-                print('=============== TIMES OF INDIA ============\n')
+                print('=============== Noticias de India ============\n')
 
                 for item in data['articles']:
                     print(str(i) + '. ' + item['title'] + '\n')
@@ -234,12 +230,12 @@ if __name__ == '__main__':
             except Exception as e:
                 print(str(e))
 
-        elif 'lock window' in query:
-            speak("Locking the device")
+        elif 'Bloquea ventana' in query:
+            speak("Bloqueando la ventana")
             ctypes.windll.user32.LockWorkStation()
 
         elif 'apaga el sistema' in query:
-            speak("Hold on a second! Your system is on its way to shut down")
+            speak("Espera un segundo, tu sistema se apagará en 10 segundos")
             subprocess.call('shutdown /p /f')
 
         elif 'vacia la papelera' in query:
@@ -260,7 +256,7 @@ if __name__ == '__main__':
             webbrowser.open("https://www.google.nl/maps/place/" + location)
 
         elif "camara" in query or "toma una foto" in query:
-            ec.capture(0, "Jarvis Camera ", "img.jpg")
+            ec.capture(0, "Tomando foto ", "img.jpg")
 
         elif "reinicia" in query:
             subprocess.call(["shutdown", "/r"])
@@ -296,9 +292,9 @@ if __name__ == '__main__':
             speak(file.read(6))
             file.close()
 
-        elif "update assistant" in query:
-            speak("After downloading the file, please replace this file with the downloaded one")
-            url = '# url after uploading file'
+        elif "Actualizar asistente" in query:
+            speak("Descargando archivo de actualización, espere un momento")
+            url = '# url '
             r = requests.get(url, stream=True)
 
             with open("Voice.py", "wb") as Pypdf:
@@ -315,10 +311,10 @@ if __name__ == '__main__':
             speak(assname)
 
         elif "clima" in query:
-            api_key = "Your_OpenWeather_API_Key"
+            api_key = "OpenWeather_API_Key"
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
-            speak("City name")
-            print("City name: ")
+            speak("Ciudad")
+            print("Ciudad: ")
             city_name = takeCommand()
             complete_url = base_url + "appid=" + api_key + "&q=" + city_name
             response = requests.get(complete_url)
@@ -326,34 +322,34 @@ if __name__ == '__main__':
 
             if x["cod"] != "404":
                 y = x["main"]
-                current_temperature = y["temp"]
-                current_pressure = y["pressure"]
-                current_humidity = y["humidity"]
+                current_temperatura = y["temp"]
+                current_presion = y["presion"]
+                current_humedad = y["humedad"]
                 z = x["weather"]
-                weather_description = z[0]["description"]
+                weather_descripcion = z[0]["descripcion"]
 
-                print("Temperature (in kelvin unit) = " +
-                      str(current_temperature) +
-                      "\nAtmospheric pressure (in hPa unit) = " +
-                      str(current_pressure) +
-                      "\nHumidity (in percentage) = " +
-                      str(current_humidity) +
-                      "\nDescription = " +
-                      str(weather_description))
+                print("Temperatura (kelvin) = " +
+                      str(current_temperatura) +
+                      "\nPresion atmosferica  (hPa) = " +
+                      str(current_presion) +
+                      "\nHumidity (porcentage) = " +
+                      str(current_humedad) +
+                      "\nDescripcion = " +
+                      str(weather_descripcion))
 
-                speak("Temperature in kelvin unit is " +
-                      str(current_temperature) +
-                      "\nAtmospheric pressure in hPa unit is " +
-                      str(current_pressure) +
-                      "\nHumidity in percentage is " +
-                      str(current_humidity) +
-                      "\nDescription " +
-                      str(weather_description))
+                speak("Temperatura en grados Kelvin es " +
+                      str(current_temperatura) +
+                      "\nPresion atmosferica en hPa es " +
+                      str(current_presion) +
+                      "\nEl porcentaje de humedad es " +
+                      str(current_humedad) +
+                      "\nDescripcion " +
+                      str(weather_descripcion))
 
             else:
-                speak("City not found")
+                speak("Ciudad no encontrada")
 
-        elif "send message " in query:
+        elif "envia mensaje " in query:
             pass
 
         elif "buenos dias" in query:
